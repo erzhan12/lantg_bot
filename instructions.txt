@@ -1,0 +1,23 @@
+export BOT=8094115377:AAEs5pH2K9tqLuv_rLv2aAFYeK0piTkBdY4
+export PUBLIC=https://YOUR_NGROK_URL.ngrok.io/webhook/4b24bf7e3cc3f6dd2d29739f582e1e23  # Replace with actual ngrok URL
+export SECRET=749003d14a287a70e77eb34741d1fdb2
+source .env && export PUBLIC=${ngrok_url}/webhook/4b24bf7e3cc3f6dd2d29739f582e1e23
+
+curl -X POST "https://api.telegram.org/bot$BOT/setWebhook" \
+  -d "url=$PUBLIC" \
+  -d "secret_token=$SECRET"
+
+==========================================
+ngrok http 8080
+
+source .env
+export BOT=${TELEGRAM_BOT_TOKEN}
+export PUBLIC=${TELEGRAM_WEBHOOK_URL}
+export SECRET=749003d14a287a70e77eb34741d1fdb2
+
+curl -X POST "https://api.telegram.org/bot$BOT/setWebhook" \
+  -d "url=$PUBLIC" \
+  -d "secret_token=$SECRET"
+
+source .venv/bin/activate
+uv run python -m telegram_bot.webhook_server
